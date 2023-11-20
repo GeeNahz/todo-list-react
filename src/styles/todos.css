@@ -1,0 +1,89 @@
+.todo-page-title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    color: #3f3f3f;
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.todo-page-main {
+    max-height: max-content;
+    width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px -6px #3f3f3f;
+}
+
+form {
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #eeedfa; /* slateblue */
+    display: flex;
+    gap: 5px;
+    transition: 0.2s ease-out;
+}
+
+form:focus-within {
+    background-color: #fff;
+    box-shadow: 0 0 15px 10px #e6e6e6, 0 4px 10px 0px #757575;
+}
+
+.todo-page-input {
+    width: 80%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 0 10px;
+    background-color: transparent;
+    font-weight: 600;
+    font-size: 14px;
+    color: #3d3d3d;
+}
+
+.todo-page-input:active,
+.todo-page-input:focus {
+    border: none;
+    outline: none;
+}
+
+.todo-page-input::placeholder {
+    font-weight: 600;
+    font-size: 14px;
+    color: #3d3d3d;
+}
+
+.todo-page-add-btn {
+    width: 20%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    color: transparent;
+    background-color: transparent;
+    transition: 0.25s ease-out;
+}
+
+.todo-page-input:focus~.todo-page-add-btn,
+.todo-page-add-btn:focus {
+    background-color: #f1f1f1;
+    color: #797979;
+    cursor: pointer;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

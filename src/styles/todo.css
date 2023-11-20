@@ -1,0 +1,67 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    width: 320px;
+    min-height: 130px;
+    box-shadow:
+        0px 0px 10px -2px #f3f3f3,
+        0px 0px 10px 0px #c5c5c5;
+}
+
+.card .text {
+    flex: 1 1 auto;
+    margin-bottom: 10px;
+}
+
+.card .actions {
+    height: fit-content;
+    display: flex;
+    gap: 10px;
+}
+
+.btn.complete {
+    background-color: #6a5acd;
+    color: #fff;
+}
+
+.btn.complete:hover {
+    background-color: #806ff3;
+}
+
+.btn.edit {
+    background-color: transparent;
+    outline: 1px solid #6a5acd;
+    color: #6a5acd;
+}
+
+.btn.edit:hover {
+    background-color: #ebe8fd;
+}
+
+.btn.delete {
+    background-color: transparent;
+    outline: 1px solid #e02121;
+    color: #e02121;
+}
+
+.btn.delete:hover {
+    background-color: #fce2e2;
+}
+
+.btn.reactivate {
+    background-color: #417be7;
+    color: #fff;
+}
+
+.btn.reactivate:hover {
+    background-color: #5287eb;
+}
+
+.date {
+    font-weight: 300;
+    font-size: 12px;
+    color: #999;
+}
