@@ -89,3 +89,12 @@ form:focus-within {
     justify-content: flex-start;
     align-items: flex-start;
 }
+
+.active,
+.complete {
+    height: fit-content;
+    max-height: 450px;
+
+    padding: 10px;
+    overflow-y: scroll;
+}
