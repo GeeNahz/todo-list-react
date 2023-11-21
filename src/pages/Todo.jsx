@@ -71,7 +71,7 @@ const Todo = () => {
         let taskText = task.task;
         let note = task.note;
         let text = "";
-        
+
         if (note !== "") {
             text = `${taskText} // ${note}`;
         } else {
@@ -117,12 +117,17 @@ const Todo = () => {
 
             <div className="todo-page-main">
                 <form onSubmit={handleSubmit}>
-                    <input
+                    <textarea
                         ref={inputEl}
                         type="text"
-                        className="todo-page-input"
+                        className="todo-page-input todo-textarea"
+                        rows={1}
                         placeholder="Write a new task. Use // to write a note"
                         value={newTask}
+                        onInput={() => {
+                            inputEl.current.style.height = `auto`
+                            inputEl.current.style.height = `${inputEl.current.scrollHeight}px`
+                        }}
                         onChange={(e) => setNewTask(e.target.value)}
                     />
                     <button type="submit" className="todo-page-add-btn btn-icon"><PlusIcon className="icon" /> <p className="text">Add list</p></button>
