@@ -1,13 +1,13 @@
 import './App.css'
 import Header from './components/Header';
-import Todos from './pages/Todos';
+import Todo from './pages/Todo';
 
 function App() {
   return (
     <main className="App">
       <Header />
       <section className='main'>
-        <Todos />
+        <Todo />
       </section>
     </main>
   );
