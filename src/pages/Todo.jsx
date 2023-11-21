@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+
+import { PlusIcon } from "@heroicons/react/20/solid"
 import { v4 as uuidv4 } from "uuid";
 
 import "../styles/todos.css";
@@ -123,7 +125,7 @@ const Todos = () => {
                         value={newTask}
                         onChange={(e) => setNewTask(e.target.value)}
                     />
-                    <button type="submit" className="todo-page-add-btn">Add list</button>
+                    <button type="submit" className="todo-page-add-btn btn-icon"><PlusIcon className="icon" /> <p className="text">Add list</p></button>
                 </form>
 
                 <TodoList
