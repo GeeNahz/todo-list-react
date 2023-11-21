@@ -1,4 +1,4 @@
-import "../styles/todo.css";
+import "../styles/todo-card.css";
 
 import { CheckIcon, PencilSquareIcon, ArrowUturnLeftIcon, TrashIcon } from "@heroicons/react/20/solid";
 
