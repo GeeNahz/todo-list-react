@@ -111,8 +111,8 @@ form:focus-within {
     align-items: flex-start;
 }
 
-.active,
-.complete {
+.active-section,
+.complete-section {
     height: fit-content;
     max-height: 450px;
 

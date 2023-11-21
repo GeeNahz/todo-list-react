@@ -8,7 +8,7 @@ const TodoList = ({ activeTasks, completedTasks, actionTrigger }) => {
   return (
     <section>
       <>
-        <div className="active" style={{ marginBottom: "50px" }}>
+        <div className="active-section" style={{ marginBottom: "50px" }}>
           <h4>Active</h4>
           <div className="cards">
             {
@@ -19,7 +19,7 @@ const TodoList = ({ activeTasks, completedTasks, actionTrigger }) => {
           </div>
         </div>
 
-        <div className="complete">
+        <div className="complete-section">
           <h4>Completed</h4>
           <div className="cards">
             {
