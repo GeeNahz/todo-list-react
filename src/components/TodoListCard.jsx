@@ -1,5 +1,7 @@
 import "../styles/todo.css";
 
+import { CheckIcon, PencilSquareIcon, ArrowUturnLeftIcon, TrashIcon } from "@heroicons/react/20/solid";
+
 
 const Todo = ({ todotype, task, todoAction }) => {
     return (
@@ -12,13 +14,37 @@ const Todo = ({ todotype, task, todoAction }) => {
             <div className="actions">
                 {
                     todotype === "complete"
-                        ? <button onClick={() => todoAction("reactivate", task.id)} className="reactivate btn">Reactivate</button>
-                        : <button onClick={() => todoAction("complete", task.id)} className="complete btn">Complete</button>
+                        ? (
+                            <ArrowUturnLeftIcon
+                                title="undo"
+                                onClick={() => todoAction("reactivate", task.id)}
+                                className="icon reactivate icon-btn"
+                            />
+                        )
+                        : (
+                            <CheckIcon
+                                title="complete"
+                                onClick={() => todoAction("complete", task.id)}
+                                className="icon icon-btn complete"
+                            />
+                        )
                 }
                 {
                     todotype === "complete"
-                        ? <button onClick={() => todoAction("delete", task.id)} className="delete btn">Delete</button>
-                        : <button onClick={() => todoAction("edit", task.id)} className="edit btn">Edit</button>
+                        ? (
+                            <TrashIcon
+                                title="delete"
+                                onClick={() => todoAction("delete", task.id)}
+                                className="delete icon-btn"
+                            />
+                        )
+                        : (
+                            <PencilSquareIcon
+                                title="edit"
+                                onClick={() => todoAction("edit", task.id)}
+                                className="icon edit icon-btn"
+                            />
+                        )
                 }
             </div>
         </div>
