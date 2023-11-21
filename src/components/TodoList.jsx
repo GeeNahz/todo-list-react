@@ -1,4 +1,4 @@
-import Todo from "./Todo";
+import TodoListCard from "./TodoListCard";
 
 const TodoList = ({ activeTasks, completedTasks, actionTrigger }) => {
   function todoAction(action, id) {
@@ -13,7 +13,7 @@ const TodoList = ({ activeTasks, completedTasks, actionTrigger }) => {
           <div className="cards">
             {
               activeTasks.map(task => (
-                <Todo key={task.id} todotype="active" task={task} todoAction={todoAction} />
+                <TodoListCard key={task.id} todotype="active" task={task} todoAction={todoAction} />
               ))
             }
           </div>
@@ -24,7 +24,7 @@ const TodoList = ({ activeTasks, completedTasks, actionTrigger }) => {
           <div className="cards">
             {
               completedTasks.map(task => (
-                <Todo key={task.id} todotype="complete" task={task} todoAction={todoAction} />
+                <TodoListCard key={task.id} todotype="complete" task={task} todoAction={todoAction} />
               ))
             }
           </div>
