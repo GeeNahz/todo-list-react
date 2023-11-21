@@ -7,7 +7,7 @@ import "../styles/todos.css";
 
 import TodoList from "../components/TodoList";
 
-const Todos = () => {
+const Todo = () => {
     const [activeTasks, setActiveTasks] = useState([]);
     const [completedTasks, setCompletedTasks] = useState([]);
     const [newTask, setNewTask] = useState("");
@@ -138,4 +138,4 @@ const Todos = () => {
     );
 }
 
-export default Todos;
+export default Todo;
