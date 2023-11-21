@@ -30,9 +30,11 @@ code {
 }
 
 .btn {
+  /* height: max-content; */
+  /* min-width: 100px; */
   border: none;
   border-radius: 5px;
-  padding: 0.8rem 1.5rem;
+  padding: 0.4rem 0.9rem;
   font-weight: 500;
   font-size: 14px;
 
@@ -42,4 +44,115 @@ code {
 .btn:focus {
   outline: none;
   border: none;
+}
+
+
+.btn.complete {
+  background-color: #6a5acd;
+  color: #fff;
+}
+
+.btn.complete:hover {
+  background-color: #806ff3;
+}
+
+.btn.edit {
+  background-color: transparent;
+  outline: 1px solid #6a5acd;
+  color: #6a5acd;
+}
+
+.btn.edit:hover {
+  background-color: #ebe8fd;
+}
+
+.btn.delete {
+  background-color: transparent;
+  outline: 1px solid #e02121;
+  color: #e02121;
+}
+
+.btn.delete:hover {
+  background-color: #fce2e2;
+}
+
+.btn.reactivate {
+  background-color: #417be7;
+  color: #fff;
+}
+
+.btn.reactivate:hover {
+  background-color: #5287eb;
+}
+
+
+.btn-icon {
+  display: flex;
+  flex-wrap: nowrap;
+  border-radius: 20px !important;
+  gap: 3px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-icon .icon {
+  font-size: 10px !important;
+  border-radius: 50%;
+  height: 100%;
+  width: max-content;
+  color: inherit !important;
+  /* background-color: rgb(152, 139, 231); */
+}
+
+.btn-icon .text {
+  font-size: 14px !important;
+  white-space: nowrap !important;
+}
+
+.icon-btn {
+  display: flex;
+  cursor: pointer;
+  flex-wrap: nowrap;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+
+  max-height: 30px !important;
+  max-width: 30px !important;
+
+  padding: 0.25rem;
+  transition: 0.2s ease-out all;
+}
+
+.icon-btn.complete {
+  color: rgb(2, 190, 96);
+}
+
+.icon-btn.complete:hover {
+  color: rgb(72, 224, 148);
+}
+
+.icon-btn.edit {
+  color: rgb(253, 180, 45);
+}
+
+.icon-btn.edit:hover {
+  color: rgb(253, 194, 84);
+}
+
+.icon-btn.reactivate {
+  color: #417be7;
+}
+
+.icon-btn.reactivate:hover {
+  color: #6995e7;
+}
+
+.icon-btn.delete {
+  color: #e23232;
+}
+
+.icon-btn.delete:hover {
+  color: #e66464;
 }

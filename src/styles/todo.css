@@ -22,44 +22,6 @@
     gap: 10px;
 }
 
-.btn.complete {
-    background-color: #6a5acd;
-    color: #fff;
-}
-
-.btn.complete:hover {
-    background-color: #806ff3;
-}
-
-.btn.edit {
-    background-color: transparent;
-    outline: 1px solid #6a5acd;
-    color: #6a5acd;
-}
-
-.btn.edit:hover {
-    background-color: #ebe8fd;
-}
-
-.btn.delete {
-    background-color: transparent;
-    outline: 1px solid #e02121;
-    color: #e02121;
-}
-
-.btn.delete:hover {
-    background-color: #fce2e2;
-}
-
-.btn.reactivate {
-    background-color: #417be7;
-    color: #fff;
-}
-
-.btn.reactivate:hover {
-    background-color: #5287eb;
-}
-
 .date {
     font-weight: 300;
     font-size: 12px;
