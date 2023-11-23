@@ -35,6 +35,8 @@ const Todo = () => {
         };
 
         setActiveTasks(prev => [...prev, toCreate]);
+
+        inputEl.current.style.height = "auto"; // reset the height of the input field
     };
 
     const findTaskIndex = useCallback((taskId, arr) => {
