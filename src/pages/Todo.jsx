@@ -25,8 +25,8 @@ const Todo = () => {
         }
 
         const arr = newTask.split("//");
-        let task = arr[0];
-        let note = arr[1] || "";
+        let task = arr[0].trim();
+        let note = arr[1].trim() || "";
         setNewTask("");
 
         const toCreate = {
