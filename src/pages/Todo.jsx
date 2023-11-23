@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 import { PlusIcon } from "@heroicons/react/20/solid"
 import { v4 as uuidv4 } from "uuid";
+import useKeyboardJs from 'react-use/lib/useKeyboardJs';
 
 import "../styles/todos.css";
 
@@ -13,8 +14,10 @@ const Todo = () => {
     const [newTask, setNewTask] = useState("");
 
     const inputEl = useRef(null);
+    const formEl = useRef(null);
+    const submitBtnEl = useRef(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = useCallback((e) => {
         e.preventDefault();
 
         if (newTask === "") {
@@ -37,7 +40,15 @@ const Todo = () => {
         setActiveTasks(prev => [...prev, toCreate]);
 
         inputEl.current.style.height = "auto"; // reset the height of the input field
-    };
+    }, [newTask]);
+
+    const [isPressed, keyboardEvent] = useKeyboardJs("ctrl + enter");
+
+    useEffect(() => {
+        if (isPressed && (keyboardEvent.target.tagName === "TEXTAREA")) {
+            formEl.current.requestSubmit(submitBtnEl.current);
+        };
+    }, [isPressed, keyboardEvent, handleSubmit]);
 
     const findTaskIndex = useCallback((taskId, arr) => {
         const index = arr.findIndex(task => task.id === taskId);
@@ -118,7 +129,10 @@ const Todo = () => {
 
 
             <div className="todo-page-main">
-                <form onSubmit={handleSubmit}>
+                <form
+                    onSubmit={handleSubmit}
+                    ref={formEl}
+                >
                     <textarea
                         ref={inputEl}
                         type="text"
@@ -132,7 +146,13 @@ const Todo = () => {
                         }}
                         onChange={(e) => setNewTask(e.target.value)}
                     />
-                    <button type="submit" className="todo-page-add-btn btn-icon"><PlusIcon className="icon" /> <p className="text">Add list</p></button>
+                    <button
+                        ref={submitBtnEl}
+                        type="submit"
+                        className="todo-page-add-btn btn-icon">
+                        <PlusIcon className="icon" />
+                        <p className="text">Add list</p>
+                    </button>
                 </form>
 
                 <TodoList
