@@ -1,17 +1,19 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 import { PlusIcon } from "@heroicons/react/20/solid"
-import { v4 as uuidv4 } from "uuid";
 import useKeyboardJs from 'react-use/lib/useKeyboardJs';
 
 import "../styles/todos.css";
+
+import TodoService from "../services/TodoService";
 
 import TodoList from "../components/TodoList";
 
 const Todo = () => {
     const [activeTasks, setActiveTasks] = useState([]);
     const [completedTasks, setCompletedTasks] = useState([]);
-    const [newTask, setNewTask] = useState("");
+    const defaultNewTask = useCallback(() => ({ text: "", id: null }), []);
+    const [newTask, setNewTask] = useState(defaultNewTask);
 
     const inputEl = useRef(null);
     const formEl = useRef(null);
@@ -20,29 +22,24 @@ const Todo = () => {
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
 
-        if (newTask === "") {
+        if (newTask.text === "") {
             return; // do nothing when nothing is typed
         }
 
-        const arr = newTask.split("//");
-        let task = arr[0].trim();
-        let note = arr[1].trim() || "";
-        setNewTask("");
-
-        const toCreate = {
-            id: uuidv4(),
-            isComplete: false,
-            dueDate: new Date().toDateString(), // will require this later
-            task,
-            note,
-        };
-
-        setActiveTasks(prev => [...prev, toCreate]);
-
+        const todoService = new TodoService()
+        const { activeTasks } = todoService.addTask(newTask);
+        setNewTask(defaultNewTask);
+        setActiveTasks([...activeTasks]);
         inputEl.current.style.height = "auto"; // reset the height of the input field
-    }, [newTask]);
+    }, [newTask, defaultNewTask]);
 
     const [isPressed, keyboardEvent] = useKeyboardJs("ctrl + enter");
+
+    useEffect(() => {
+        const { activeTasks, completedTasks } = new TodoService().getTasks()
+        setActiveTasks([...activeTasks]);
+        setCompletedTasks([...completedTasks]);
+    }, [])
 
     useEffect(() => {
         if (isPressed && (keyboardEvent.target.tagName === "TEXTAREA")) {
@@ -55,26 +52,33 @@ const Todo = () => {
         return index;
     }, []);
 
-    const flagTaskAsComplete = (taskId) => {
-        const index = findTaskIndex(taskId, activeTasks);
-        activeTasks[index].isComplete = true;
+    const completeTask = (taskId) => {
+        const i = findTaskIndex(taskId, activeTasks);
+        const task = activeTasks[i];
 
-        setActiveTasks([...activeTasks]);
+        const { activeTasks: active, completedTasks } = new TodoService().completeTask(task);
+
+        setActiveTasks([...active]);
+        setCompletedTasks([...completedTasks]);
     };
 
     const reactivateTask = (taskId) => {
         const index = findTaskIndex(taskId, completedTasks);
-        completedTasks[index].isComplete = false;
+        const task = completedTasks[index];
 
-        const task = completedTasks.splice(index, 1)[0];
+        const { activeTasks: active, completedTasks: complete } = new TodoService().undoCompleteTask(task)
 
-        setActiveTasks(prev => [...prev, task]);
+        setActiveTasks([...active]);
+        setCompletedTasks([...complete]);
     };
 
     const deleteTask = (taskId) => {
         const index = findTaskIndex(taskId, completedTasks);
-        completedTasks.splice(index, 1);
-        setCompletedTasks([...completedTasks]);
+        const task = completedTasks[index];
+
+        const { completedTasks: complete } = new TodoService().deleteCompletedTask(task);
+
+        setCompletedTasks([...complete]);
     };
 
     const setupTaskForEditing = (taskId) => {
@@ -91,15 +95,16 @@ const Todo = () => {
             text = taskText;
         }
 
-        setNewTask(text);
+        setNewTask({ id: task.id, text });
         inputEl.current.focus();
 
-        activeTasks.splice(index, 1);
+        const { activeTasks: active } = new TodoService().deleteActiveTask(task);
+        setActiveTasks([...active]);
     }
 
     const actionTrigger = (actiontype, taskId) => {
         if (actiontype === "complete") {
-            flagTaskAsComplete(taskId);
+            completeTask(taskId);
         } else if (actiontype === "edit") {
             setupTaskForEditing(taskId);
         } else if (actiontype === "delete") {
@@ -112,16 +117,6 @@ const Todo = () => {
             alert("Please provide a valid action trigger type");
         }
     };
-
-    useEffect(() => {
-        for (const task of activeTasks) {
-            const index = findTaskIndex(task.id, activeTasks);
-            if (task.isComplete === true) {
-                const completed = activeTasks.splice(index, 1)[0];
-                setCompletedTasks(prev => [...prev, completed]);
-            }
-        }
-    }, [activeTasks, findTaskIndex]);
 
     return (
         <section className='todo-page'>
@@ -139,12 +134,12 @@ const Todo = () => {
                         className="todo-page-input todo-textarea"
                         rows={1}
                         placeholder="Write a new task. Use // to write a note"
-                        value={newTask}
+                        value={newTask.text}
                         onInput={() => {
                             inputEl.current.style.height = `auto`
                             inputEl.current.style.height = `${inputEl.current.scrollHeight}px`
                         }}
-                        onChange={(e) => setNewTask(e.target.value)}
+                        onChange={(e) => setNewTask(prev => ({ ...prev, text: e.target.value }))}
                     />
                     <button
                         ref={submitBtnEl}
